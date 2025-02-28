@@ -46,17 +46,17 @@ export const MiscInvoiceRouter = createTRPCRouter({
       );
       const invoiceId = invoice[0];
 
-      for (const item of input.items) {
-        const invoiceItems = await ctx.db.client
-          .query(/* surrealql */ `CREATE invoice_items SET
-              description= "${item.description}",
-              amount= ${item.amount},
-              invoice_id=${invoiceId[0]?.id},
-             quantity=${item.quantity},
-             vatable=${item.vatable};
-              `);
-        console.log("created invoiceItems", invoiceItems);
-      }
+      // for (const item of input.items) {
+      //   const invoiceItems = await ctx.db.client
+      //     .query(/* surrealql */ `CREATE invoice_items SET
+      //         description= "${item.description}",
+      //         amount= ${item.amount},
+      //         invoice_id=${invoiceId[0]?.id},
+      //        quantity=${item.quantity},
+      //        vatable=${item.vatable};
+      //         `);
+      //   console.log("created invoiceItems", invoiceItems);
+      // }
     }),
 
   get_All_invoices: protectedProcedure

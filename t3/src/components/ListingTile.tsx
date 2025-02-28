@@ -138,7 +138,7 @@ export default function ListingTile(props: {
                                 await update_images.mutateAsync({
                                   images: updated.map((img) => ({
                                     id: img.id.toString(),
-                                    Order: img.order,
+                                    Order: img.Order,
                                   })),
                                 });
                                 await images.refetch();

@@ -26,8 +26,8 @@ export function useCountry() {
     queryFn: CFTrace,
   });
   const country_code = get_team.data?.team.currency ?? cftrace.data?.loc;
-  const priceapi = api.payment.GetPricePerUser.useQuery({
-    country_code,
-  });
-  return priceapi;
+  // const priceapi = api.payment.GetPricePerUser.useQuery({
+  //   country_code,
+  // });
+  // return priceapi;
 }
