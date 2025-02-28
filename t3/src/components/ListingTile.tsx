@@ -485,10 +485,10 @@ export default function ListingTile(props: {
             {" "}
             <Image
               src={
-                props.Images.filter((image) => image.Order === 0)[0]?.src ?? ""
+                props.Images.filter((image) => image.Order === 1)[0]?.src ?? ""
               }
               alt={
-                props.Images.filter((image) => image.Order === 0)[0]?.src ?? ""
+                props.Images.filter((image) => image.Order === 1)[0]?.src ?? ""
               }
               height={1000}
               width={1000}

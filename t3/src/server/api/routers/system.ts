@@ -19,8 +19,7 @@ import { Resend } from "resend";
 import { render } from "~/lib/reactmail/render";
 import { EmailInvite } from "~/emails/inviteMember";
 import { env } from "~/env";
-// import Auction from "~/pages/[team]/~/auction";
-// import CompanyExpenses from "~/pages/[team]/~/expenses";
+
 import { v4 as uuidv4 } from "uuid";
 
 export interface EmailUserConfigCustom extends Record<string, unknown> {

@@ -8,15 +8,13 @@ export type GetMiscInvoice = [
 ]
 type GetMiscInvoicequery1 = {
   clientReference: string;
-  due: string;
+  due: Date;
   id: RecordId;
   invoiceToId: InvoiceToId;
-  invoice_code: number;
   invoice_items: Invoiceitems[];
-  issued: string;
+  issued: Date;
   reference: boolean;
   status: string;
-  team: RecordId;
 }
 type Invoiceitems = {
   amount: number;
@@ -24,7 +22,6 @@ type Invoiceitems = {
   id: RecordId;
   invoice_id: RecordId;
   quantity: number;
-  team: RecordId;
   vatable: boolean;
 }
 type InvoiceToId = {
@@ -42,7 +39,5 @@ type InvoiceToId = {
   contact_name: string;
   contact_phone: string;
   contact_surname: string;
-  created_by: string;
   id: RecordId;
-  team: RecordId;
 }

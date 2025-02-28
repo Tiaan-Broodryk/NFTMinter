@@ -19,8 +19,8 @@ const client_z = z.object({
   client_company_trading_name: z.string().nullable().optional(),
   client_is_company: z.boolean().optional(),
   client_id_no: z.string().nullable().optional(),
-  team: z.coerce.string(),
-  created_by: z.coerce.string(),
+
+
 });
 
 export const clientsRouter = createTRPCRouter({
@@ -29,7 +29,7 @@ export const clientsRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const result = await ctx.db.client.insert("clients", {
         ...input,
-        team: new RecordId("team", input.team.split(":")[1]!),
+
       });
       return true;
     }),

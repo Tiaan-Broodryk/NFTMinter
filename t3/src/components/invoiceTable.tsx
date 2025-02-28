@@ -24,43 +24,51 @@ const InvoiceTable = () => {
       //   header: "Invoice Code",
       //   size: 50,
       // },
-      // {
-      //   accessorFn: (row) => (
-      //     <>
-      //       {row.invoiceToId.contact_name} {row.invoiceToId.client_company_name}
-      //     </>
-      //   ),
-      //   header: "Client Name",
-      //   size: 50,
-      // },
-      // {
-      //   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      //   size: 50,
-      //   accessorFn: (row) => new Date(row.issued), //convert to Date for sorting and filtering
-      //   id: "invoicedate",
-      //   header: "Invoice Date",
-      //   Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
-      // },
-      // {
-      //   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      //   size: 50,
-      //   accessorFn: (row) => new Date(row.due), //convert to Date for sorting and filtering
-      //   id: "invoiceDuedate",
-      //   header: "Invoice Due Date",
-      //   Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
-      // },
-      // {
-      //   accessorKey: "status", //access nested data with dot notation
-      //   header: "Status",
-      //   size: 50,
-      // },
-      //   {
-      //     accessorFn: (row) => <>
-      //     {row.invoice_items.map((item) => )}
-      //     </>,
-      //     header: "Invoice Total",
-      //     size: 50,
-      //   },
+
+      {
+        accessorFn: (row) => (
+          <>
+            {row.invoiceToId.contact_name} {row.invoiceToId.client_company_name}
+          </>
+        ),
+        header: "Client Name",
+        size: 50,
+      },
+      {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        size: 50,
+        accessorFn: (row) => new Date(row.issued), //convert to Date for sorting and filtering
+        id: "invoicedate",
+        header: "Invoice Date",
+        Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
+      },
+      {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        size: 50,
+        accessorFn: (row) => new Date(row.due), //convert to Date for sorting and filtering
+        id: "invoiceDuedate",
+        header: "Invoice Due Date",
+        Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
+      },
+
+  
+
+
+      {
+        accessorFn: (row) => (
+          <>
+            <div>
+              R{" "}
+              {row.invoice_items
+                .map((item) => item.amount)
+                .reduce((a, b) => a + b, 0)}
+            </div>
+          </>
+        ),
+        header: "Invoice Total",
+        size: 50,
+      },
+
     ],
     [],
   );
@@ -69,13 +77,13 @@ const InvoiceTable = () => {
     columns,
     data,
     muiTableBodyRowProps: ({ row }) => ({
-      // onClick: () => {
-      //   router
-      //     .push(
-      //       `//~/miscInvoice/${row.original.id.toString().split(":")[1]}/view`,
-      //     )
-      //     .catch((e) => console.error(e));
-      // },
+
+      onClick: () => {
+        router
+          .push(`/miscInvoice/${row.original.id.toString().split(":")[1]}/view`)
+          .catch((e) => console.error(e));
+      },
+
       sx: {
         cursor: "pointer", //you might want to change the cursor too when adding an onClick
       },

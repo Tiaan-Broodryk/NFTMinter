@@ -65,7 +65,7 @@ export const MiscInvoiceRouter = createTRPCRouter({
         /* surrealql */ `SELECT * ,(SELECT * FROM invoice_items WHERE invoice_id = $parent.id) as invoice_items  FROM misc_invoice FETCH invoiceToId;`,
         "GetAllInvoices",
         {
-          skip_write: false,
+          skip_write: true,
         },
       );
       const invoices = result[0];
