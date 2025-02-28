@@ -1,0 +1,32 @@
+export * from "./Alert";
+export * from "./Avatar";
+export * from "./ButtonDropdown";
+export * from "./ButtonIcon";
+export * from "./Button";
+export * from "./Chips";
+export * from "./RowCol";
+export * from "./Checkbox";
+export * from "./CheckboxGroup";
+export * from "./Data";
+export * from "./Heading";
+export * from "./Input";
+export * from "./Label";
+export * from "./Loading";
+export * from "./Logo";
+export * from "./Modal";
+export * from "./NoSSR";
+export * from "./Section";
+export * from "./Select";
+export * from "./Seperator";
+export * from "./Table";
+export * from "./TextArea";
+export * from "./Version";
+export * from "./Upload";
+export * from "./Img";
+export * from "./cn";
+export * from "./Paragraph";
+
+export type DefaultProps<G> = {
+  className?: string;
+  children?: React.ReactNode;
+} & G;

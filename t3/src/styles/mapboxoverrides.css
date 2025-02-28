@@ -1,0 +1,9 @@
+.mapboxgl-ctrl-bottom-left {
+  /* display: none; */
+  opacity: 0.01;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  /* display: none; */
+  opacity: 0.01;
+}
