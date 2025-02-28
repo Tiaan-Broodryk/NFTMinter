@@ -276,84 +276,84 @@ export async function cmscloud_lead_push(input: {
   const sales_executives_data = salesExecutives[0];
   const resend = new Resend();
 
-  await resend.emails.send({
-    from: env.RESEND_FROM,
-    to: teamData[0]?.leads_email ?? "",
-    subject: `New Lead on the ${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
-    text: render(
-      EmailLead({
-        Receiver_name: teamData[0]?.company_name ?? "",
-        Lead_Vehicle: `${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
-        Lead_name: input.FirstName ?? "",
-        Lead_email: input.Email ?? "",
-        Lead_contact_number: input.CellPhone ?? "",
-        Lead_message: input.message ?? "",
-      }),
-      {
-        plainText: true,
-      },
-    ),
-    html: render(
-      EmailLead({
-        Receiver_name: teamData[0]?.name ?? "",
-        Lead_Vehicle: `${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
-        Lead_name: input.FirstName ?? "",
-        Lead_email: input.Email ?? "",
-        Lead_contact_number: input.CellPhone ?? "",
-        Lead_message: input.message ?? "",
-      }),
-      {},
-    ),
-  });
+  // await resend.emails.send({
+  //   from: env.RESEND_FROM,
+  //   to: teamData[0]?.leads_email ?? "",
+  //   subject: `New Lead on the ${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
+  //   text: render(
+  //     EmailLead({
+  //       Receiver_name: teamData[0]?.company_name ?? "",
+  //       Lead_Vehicle: `${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
+  //       Lead_name: input.FirstName ?? "",
+  //       Lead_email: input.Email ?? "",
+  //       Lead_contact_number: input.CellPhone ?? "",
+  //       Lead_message: input.message ?? "",
+  //     }),
+  //     {
+  //       plainText: true,
+  //     },
+  //   ),
+  //   html: render(
+  //     EmailLead({
+  //       Receiver_name: teamData[0]?.name ?? "",
+  //       Lead_Vehicle: `${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
+  //       Lead_name: input.FirstName ?? "",
+  //       Lead_email: input.Email ?? "",
+  //       Lead_contact_number: input.CellPhone ?? "",
+  //       Lead_message: input.message ?? "",
+  //     }),
+  //     {},
+  //   ),
+  // });
 
-  const sendEmails = async () => {
-    const results = await Promise.all(
-      sales_executives_data
-        .filter((s) => s.leadAlowed === true)
-        .map(async (sales_executive) => {
-          try {
-            await resend.emails.send({
-              from: env.RESEND_FROM,
-              to: sales_executive.email,
-              subject: `New Lead on the ${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""} `,
-              text: render(
-                EmailLead({
-                  Receiver_name: sales_executive.name,
-                  Lead_Vehicle: `${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
-                  Lead_name: input.FirstName ?? "",
-                  Lead_email: input.Email ?? "",
-                  Lead_contact_number: input.CellPhone ?? "",
-                  Lead_message: input.message ?? "",
-                }),
-                {
-                  plainText: true,
-                },
-              ),
-              html: render(
-                EmailLead({
-                  Receiver_name: sales_executive.name,
-                  Lead_Vehicle: `${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
-                  Lead_name: input.FirstName ?? "",
-                  Lead_email: input.Email ?? "",
-                  Lead_contact_number: input.CellPhone ?? "",
-                  Lead_message: input.message ?? "",
-                }),
-                {},
-              ),
-            });
-          } catch (error) {
-            console.error(
-              `Failed to send email to ${sales_executive.email}:`,
-              error,
-            );
-          }
-        }),
-    );
+  // const sendEmails = async () => {
+  //   const results = await Promise.all(
+  //     sales_executives_data
+  //       .filter((s) => s.leadAlowed === true)
+  //       .map(async (sales_executive) => {
+  //         try {
+  //           await resend.emails.send({
+  //             from: env.RESEND_FROM,
+  //             to: sales_executive.email,
+  //             subject: `New Lead on the ${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""} `,
+  //             text: render(
+  //               EmailLead({
+  //                 Receiver_name: sales_executive.name,
+  //                 Lead_Vehicle: `${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
+  //                 Lead_name: input.FirstName ?? "",
+  //                 Lead_email: input.Email ?? "",
+  //                 Lead_contact_number: input.CellPhone ?? "",
+  //                 Lead_message: input.message ?? "",
+  //               }),
+  //               {
+  //                 plainText: true,
+  //               },
+  //             ),
+  //             html: render(
+  //               EmailLead({
+  //                 Receiver_name: sales_executive.name,
+  //                 Lead_Vehicle: `${vehicleData[0]?.year ?? 0} ${vehicleData[0]?.make ?? ""} ${vehicleData[0]?.model ?? ""} ${vehicleData[0]?.varient ?? ""}`,
+  //                 Lead_name: input.FirstName ?? "",
+  //                 Lead_email: input.Email ?? "",
+  //                 Lead_contact_number: input.CellPhone ?? "",
+  //                 Lead_message: input.message ?? "",
+  //               }),
+  //               {},
+  //             ),
+  //           });
+  //         } catch (error) {
+  //           console.error(
+  //             `Failed to send email to ${sales_executive.email}:`,
+  //             error,
+  //           );
+  //         }
+  //       }),
+  //   );
 
-    console.log("All emails have been processed:", results);
-  };
+  //   console.log("All emails have been processed:", results);
+  // };
 
-  await sendEmails();
+  // await sendEmails();
 
   return lead;
 }

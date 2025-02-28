@@ -19,12 +19,11 @@ const InvoiceTable = () => {
 
   const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
     () => [
-      {
-        accessorKey: "invoice_code", //access nested data with dot notation
-        header: "Invoice Code",
-        size: 50,
-      },
-
+      // {
+      //   accessorKey: "invoice_code", //access nested data with dot notation
+      //   header: "Invoice Code",
+      //   size: 50,
+      // },
       {
         accessorFn: (row) => (
           <>
@@ -50,18 +49,25 @@ const InvoiceTable = () => {
         header: "Invoice Due Date",
         Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
       },
+      // {
+      //   accessorKey: "status", //access nested data with dot notation
+      //   header: "Status",
+      //   size: 50,
+      // },
       {
-        accessorKey: "status", //access nested data with dot notation
-        header: "Status",
+        accessorFn: (row) => (
+          <>
+            <div>
+              R{" "}
+              {row.invoice_items
+                .map((item) => item.amount)
+                .reduce((a, b) => a + b, 0)}
+            </div>
+          </>
+        ),
+        header: "Invoice Total",
         size: 50,
       },
-      //   {
-      //     accessorFn: (row) => <>
-      //     {row.invoice_items.map((item) => )}
-      //     </>,
-      //     header: "Invoice Total",
-      //     size: 50,
-      //   },
     ],
     [],
   );
@@ -72,9 +78,7 @@ const InvoiceTable = () => {
     muiTableBodyRowProps: ({ row }) => ({
       onClick: () => {
         router
-          .push(
-            `//~/miscInvoice/${row.original.id.toString().split(":")[1]}/view`,
-          )
+          .push(`/miscInvoice/${row.original.id.toString().split(":")[1]}/view`)
           .catch((e) => console.error(e));
       },
       sx: {

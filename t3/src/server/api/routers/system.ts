@@ -5,7 +5,7 @@ import slug from "slug";
 
 import { RecordId } from "surrealdb";
 import { TRPCError } from "@trpc/server";
-import { type role_types } from "~/components/members/roles";
+// import { type role_types } from "~/components/members/roles";
 import { type NSurreal } from "~/lib/netron_surreal";
 import { type Queries } from "~/generated/combined";
 import { type Awaitable } from "next-auth";
@@ -19,8 +19,7 @@ import { Resend } from "resend";
 import { render } from "~/lib/reactmail/render";
 import { EmailInvite } from "~/emails/inviteMember";
 import { env } from "~/env";
-import Auction from "~/pages/[team]/~/auction";
-import CompanyExpenses from "~/pages/[team]/~/expenses";
+
 import { v4 as uuidv4 } from "uuid";
 
 export interface EmailUserConfigCustom extends Record<string, unknown> {
@@ -123,7 +122,7 @@ async function create_team(input: {
       {
         id: RecordId<"teammember">;
         created_at: Date;
-        role: (typeof role_types)[number]["id"];
+        role: "";
         team: RecordId<"team">;
         user: RecordId<"user">;
         pending: boolean;

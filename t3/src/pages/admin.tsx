@@ -16,6 +16,7 @@ import Saved from "~/components/notifications/saved";
 import PublishedNotify from "~/components/notifications/published";
 import ListingTile from "~/components/ListingTile";
 import MiscInvoice from "~/components/Invoicing";
+import Clients from "~/components/clients";
 export default function Admin() {
   const [createOpen, setCreateOpen] = useState({
     open: false,
@@ -487,6 +488,9 @@ export default function Admin() {
               />
             </>
           ))}
+        </div>
+        <div className="mt-5">
+          <Clients />
         </div>
         <div className="mt-5">
           {" "}
