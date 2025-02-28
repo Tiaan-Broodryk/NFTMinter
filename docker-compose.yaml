@@ -17,23 +17,6 @@ services:
       - '0.0.0.0:8080'
       - 'surrealkv://dbdata'
     restart: always
-  datafetcher:
-    build:
-      context: ./datafetcher
-      dockerfile: Dockerfile
-    environment:
-      SOLANA_RPC: "${SOLANA_RPC}"
-      SOLANA_SPLTOKEN_MINT_ADDRESS: "${SOLANA_SPLTOKEN_MINT_ADDRESS}"
-      SURREALDB_HOST: "${SURREALDB_HOST}"
-      SURREALDB_USER: "${SURREALDB_USER}"
-      SURREALDB_PASS: "${SURREALDB_PASS}"
-      SURREALDB_NS: "${SURREALDB_NS}"
-      SURREALDB_DB: "${SURREALDB_DB}"
-      BIRDEYE_KEY: "${BIRDEYE_KEY}"
-      HELIUS_KEY: "${HELIUS_KEY}"
-    links:
-      - db
-    restart: always
   t3:
     build:
       context: ./t3
@@ -53,7 +36,3 @@ services:
       SURREALDB_DB: "${SURREALDB_DB}"
     links:
       - db
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
