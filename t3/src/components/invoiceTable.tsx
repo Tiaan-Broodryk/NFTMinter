@@ -24,6 +24,7 @@ const InvoiceTable = () => {
       //   header: "Invoice Code",
       //   size: 50,
       // },
+
       {
         accessorFn: (row) => (
           <>
@@ -49,11 +50,10 @@ const InvoiceTable = () => {
         header: "Invoice Due Date",
         Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
       },
-      // {
-      //   accessorKey: "status", //access nested data with dot notation
-      //   header: "Status",
-      //   size: 50,
-      // },
+
+  
+
+
       {
         accessorFn: (row) => (
           <>
@@ -68,6 +68,7 @@ const InvoiceTable = () => {
         header: "Invoice Total",
         size: 50,
       },
+
     ],
     [],
   );
@@ -76,11 +77,13 @@ const InvoiceTable = () => {
     columns,
     data,
     muiTableBodyRowProps: ({ row }) => ({
+
       onClick: () => {
         router
           .push(`/miscInvoice/${row.original.id.toString().split(":")[1]}/view`)
           .catch((e) => console.error(e));
       },
+
       sx: {
         cursor: "pointer", //you might want to change the cursor too when adding an onClick
       },
