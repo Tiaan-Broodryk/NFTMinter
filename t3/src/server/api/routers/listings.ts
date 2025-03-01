@@ -222,7 +222,7 @@ export const listingRouter = createTRPCRouter({
 
             await resend.emails.send({
                 from: env.RESEND_FROM,
-                to: "booknow@nadia-accommodation.co.za",
+                to: "nadiaswanepoel36@gmail.com",
                 subject: `New Lead on ${listingData[0]?.Title ?? ""}`,
                 text: render(
                     EmailLead({

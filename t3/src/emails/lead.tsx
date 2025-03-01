@@ -14,7 +14,7 @@ export const EmailLead = (props: {
       <Section>
         {/* <img src="https://www.autodex.co.za/_next/image?url=%2FAutoDex%2FlogoNew.png&w=3840&q=75" /> */}
         <Text style={text}>
-          Hey {props.Receiver_name}, you received a new lead for
+          Hey {props.Receiver_name}, you received a new lead for{" "}
           {props.Lead_Listing}
         </Text>
         <Text style={text}>Name: {props.Lead_name}</Text>
