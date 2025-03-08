@@ -151,32 +151,9 @@ export default function Nav() {
         <DisclosurePanel className="sm:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
             {session.status === "authenticated" &&
-            (session.data.user.email === "nadiaswalepoel36@gmail.com" ||
-              session.data.user.email === "tiaanbroodryk44@gmail.com") ? (
-              <>
-                {navigation.map((item) => (
-                  <DisclosureButton
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    aria-current={item.current ? "page" : undefined}
-                    className={classNames(
-                      item.current
-                        ? "bg-neutral-900 text-white"
-                        : "text-neutral-300 hover:bg-neutral-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium ",
-                    )}
-                  >
-                    {item.name}
-                  </DisclosureButton>
-                ))}
-              </>
-            ) : session.status === "authenticated" ? (
-              <div>
-                {/* This is where you can render a different component for other authenticated users */}
-                {navigation
-                  .filter((item) => item.name !== "Admin")
-                  .map((item) => (
+              session.data.user.email === "nadiaswanepoel36@gmail.com" && (
+                <>
+                  {navigation.map((item) => (
                     <DisclosureButton
                       key={item.name}
                       as="a"
@@ -192,8 +169,31 @@ export default function Nav() {
                       {item.name}
                     </DisclosureButton>
                   ))}
-              </div>
-            ) : null}
+                </>
+              )}
+            {session.status === "authenticated" &&
+              session.data.user.email !== "nadiaswanepoel36@gmail.com" && (
+                <>
+                  {navigation
+                    .filter((item) => item.name !== "Admin")
+                    .map((item) => (
+                      <DisclosureButton
+                        key={item.name}
+                        as="a"
+                        href={item.href}
+                        aria-current={item.current ? "page" : undefined}
+                        className={classNames(
+                          item.current
+                            ? "bg-neutral-900 text-white"
+                            : "text-neutral-300 hover:bg-neutral-700 hover:text-white",
+                          "block rounded-md px-3 py-2 text-base font-medium ",
+                        )}
+                      >
+                        {item.name}
+                      </DisclosureButton>
+                    ))}
+                </>
+              )}
 
             {session.status === "unauthenticated" && (
               <>
