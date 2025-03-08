@@ -44,7 +44,7 @@ export default function Footer() {
             </div>
             <div className="font-bold text-white">Cell : 060 814 4291</div>
             <div className="font-bold text-white">
-              Email : nadiaswalepoel36@gmail.com
+              Email : booknow@nadia-accommodation.co.za
             </div>
           </div>
           <div className="mt-16 grid  grid-cols-2 gap-8 pt-5 xl:col-span-2 xl:mt-0">
