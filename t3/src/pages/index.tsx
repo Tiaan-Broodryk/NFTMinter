@@ -60,7 +60,7 @@ export default function Home(
       <div className="w-screen overflow-hidden">
         <Nav />
         <Hero />
-        <pre>{JSON.stringify(session, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
         <div className="bg-neutral-600 p-5">
           {" "}
           <div className="mx-auto mt-2 grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-3">
