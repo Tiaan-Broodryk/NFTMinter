@@ -57,10 +57,10 @@ export default function Home(
           className="display:none;visibility:hidden hidden"
         ></iframe>
       </noscript>
-      <div>
-        {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
+      <div className="w-screen overflow-hidden">
         <Nav />
         <Hero />
+        <pre>{JSON.stringify(session, null, 2)}</pre>
         <div className="bg-neutral-600 p-5">
           {" "}
           <div className="mx-auto mt-2 grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-3">
@@ -91,6 +91,7 @@ export default function Home(
             ))}
           </div>
         </div>
+
         <div className="relative  h-[300px] bg-black md:h-[580px]">
           <div className="z-10">
             {" "}
