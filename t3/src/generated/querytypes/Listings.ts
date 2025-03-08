@@ -25,5 +25,4 @@ type Listingimages = {
   id: RecordId;
   image_url: string;
   listing_id: RecordId;
-  order: number;
 }
