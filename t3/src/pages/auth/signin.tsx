@@ -39,7 +39,7 @@ export default function SignIn({
                 type="email"
                 id="email"
                 name="email"
-                className="white w-full"
+                className="w-full text-black"
               />
 
               <button
