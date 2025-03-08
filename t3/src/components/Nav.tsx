@@ -63,7 +63,8 @@ export default function Nav() {
                 <div className="flex space-x-4">
                   {session.status === "authenticated" &&
                   (session.data.user.email === "nadiaswanepoel36@gmail.com" ||
-                    session.data.user.email === "tiaanbroodryk44@gmail.com") ? (
+                    session.data.user.email ===
+                      "nadiaswanepoel36@gmail.com") ? (
                     <>
                       {navigation.map((item) => (
                         <a
