@@ -405,11 +405,11 @@ export default function ListingTile2(props: {
             {" "}
             <Image
               src={
-                props.Images.filter((image) => image.Order === 1)[0]
+                props.Images.filter((image) => image.Order === 0)[0]
                   ?.image_url ?? ""
               }
               alt={
-                props.Images.filter((image) => image.Order === 1)[0]
+                props.Images.filter((image) => image.Order === 0)[0]
                   ?.image_url ?? ""
               }
               height={1000}

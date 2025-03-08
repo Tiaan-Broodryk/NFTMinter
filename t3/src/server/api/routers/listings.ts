@@ -61,7 +61,7 @@ export const listingRouter = createTRPCRouter({
                 parking: z.number(),
                 id: z.string(),
                 people: z.number(),
-
+                Images: z.array(z.object({ src: z.string(), Order: z.number(), listing_id: z.string(), id: z.coerce.string() })),
             }),
         )
         .mutation(async ({ input, ctx }) => {
@@ -73,23 +73,21 @@ export const listingRouter = createTRPCRouter({
             );
             const listings = listing[0];
 
-            // for (const Image of input.Images.filter((i) => i.src !== "")) {
-            //     if (Image.id.includes("listing_image")) {
-            //         const UpdateImages = await ctx.db.client
-            //             .query(/* surrealql */ `UPDATE ${Image.id} SET order = ${Image.Order};`);
+            for (const Image of input.Images.filter((i) => i.src !== "")) {
+                if (Image.id.includes("listing_image")) {
+                    const UpdateImages = await ctx.db.client
+                        .query(/* surrealql */ `UPDATE ${Image.id} SET Order = ${Image.Order};`);
 
-            //     } else {
-            //         const CreateImages = await ctx.db.client
-            //             .query(/* surrealql */ `CREATE listing_image SET
-            //      Order = ${Image.Order},
-            //      image_url = "${Image.src}",
+                } else {
+                    const CreateImages = await ctx.db.client
+                        .query(/* surrealql */ `CREATE listing_image SET
+                  Order = ${Image.Order},
+                  image_url = "${Image.src}",
+                  listing_id = ${listings[0]?.id.toString()};
+                  `);
+                }
 
-            //      listing_id = ${listings[0]?.id.toString()};
-
-            //      `);
-            //     }
-
-            // }
+            }
             return listing;
         }),
 

@@ -42,7 +42,7 @@ export default function ListingTile(props: {
   const [Open, setOpen] = useState({
     open: false,
   });
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<RouterInputs["Listing"]["update"]>({
     Description: "",
     Title: "",
     braai: false,
@@ -54,7 +54,7 @@ export default function ListingTile(props: {
     parking: 0,
     id: "",
     people: 0,
-    // Images: [{ src: "", Order: 0, id: "", listing_id: "" }],
+    Images: [{ src: "", Order: 0, id: "", listing_id: "" }],
   });
   const images = api.Listing.get_listing_images.useQuery({
     listing_id: props.id,
@@ -64,9 +64,6 @@ export default function ListingTile(props: {
   if (form.id !== props.id) {
     setForm(props);
   }
-  const [photos, setPhotos] = useState([
-    { id: "", src: "", order: 0, vehicle_id: "" },
-  ]);
 
   const update_images = api.Listing.update_images.useMutation();
   const image_delete = api.Listing.image_delete.useMutation();
@@ -102,7 +99,7 @@ export default function ListingTile(props: {
                         <RiCloseLargeLine />
                       </button>
                     </div>
-                    {/* <pre>{JSON.stringify(imageData, null, 2)}</pre> */}
+                    <pre>{JSON.stringify(form, null, 2)}</pre>
 
                     <div className="mt-2 rounded-md p-2">
                       <Label title="Name">
@@ -123,36 +120,38 @@ export default function ListingTile(props: {
                         Listing Images
                       </div>
                       <div>
-                        {imageData.length !== 0 && (
+                        {form.Images.length !== 0 && (
                           <>
-                            <Gallery3
-                              images={imageData.map((img) => ({
-                                image_url: img.image_url,
-                                Order: img.Order,
-                                id: img.id.toString(),
-                                listing_id: img.listing_id.toString(),
-                              }))}
+                            <Gallery2
+                              images={
+                                form.Images.map((img) => ({
+                                  src: img.src, // Assuming d.url is in scope (from an outer context)
+                                  id: img.id.toString(),
+                                  order: img.Order,
+                                })) ?? []
+                              }
                               onReorder={async (updated) => {
                                 console.log(updated);
                                 // setPhotos(updated);
-                                await update_images.mutateAsync({
-                                  images: updated.map((img) => ({
-                                    id: img.id.toString(),
-                                    Order: img.Order,
-                                  })),
-                                });
-                                await images.refetch();
+
+                                const res = updated.map((img) => ({
+                                  src: img.src, // Assuming d.url is in scope (from an outer context)
+                                  id: img.id.toString(),
+                                  Order: img.order,
+                                  listing_id: props.id.toString(),
+                                }));
+                                setForm({ ...form, Images: res });
                               }}
                               onDelete={async (img) => {
                                 await image_delete.mutateAsync({
                                   image_id: img.id.toString(),
                                 });
-                                setPhotos(
-                                  photos?.filter(
+                                setForm((prevForm) => ({
+                                  ...prevForm,
+                                  Images: prevForm.Images.filter(
                                     (i) => i.id !== img.id.toString(),
-                                  ) ?? [],
-                                );
-                                await images.refetch();
+                                  ),
+                                }));
                               }}
                             />
                           </>
@@ -168,12 +167,22 @@ export default function ListingTile(props: {
 
                           console.log(first);
 
-                          const res = await addImage.mutateAsync({
-                            image_url: data.map((d) => d.url),
-
-                            listing_id: props.id.toString() ?? "",
+                          const res = data.map((d) => {
+                            setForm({
+                              ...form,
+                              Images: [
+                                ...form.Images,
+                                {
+                                  src: d.url,
+                                  Order:
+                                    form.Images.filter((e) => e.src !== "")
+                                      .length + 1,
+                                  id: crypto.randomUUID(),
+                                  listing_id: props.id.toString(),
+                                },
+                              ],
+                            });
                           });
-                          await images.refetch();
                         }}
                         multiple
                       />
@@ -485,10 +494,10 @@ export default function ListingTile(props: {
             {" "}
             <Image
               src={
-                props.Images.filter((image) => image.Order === 1)[0]?.src ?? ""
+                props.Images.filter((image) => image.Order === 0)[0]?.src ?? ""
               }
               alt={
-                props.Images.filter((image) => image.Order === 1)[0]?.src ?? ""
+                props.Images.filter((image) => image.Order === 0)[0]?.src ?? ""
               }
               height={1000}
               width={1000}

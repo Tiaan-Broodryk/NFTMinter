@@ -84,6 +84,7 @@ export default function Admin() {
                       />
                     </Label>
                   </div>
+                  <pre>{JSON.stringify(form.Images, null, 2)}</pre>
                   <div className="mb-2 mt-2 rounded-md bg-neutral-200 p-4">
                     <div className=" font-semibold text-gray-900">
                       Listing Images
@@ -147,12 +148,6 @@ export default function Admin() {
                             ],
                           });
                         });
-                        // const res = await addImage.mutateAsync({
-                        //   image_url: data.map((d) => d.url),
-
-                        //   vehicle_id: vehicle.data?.vehicle.id.toString() ?? "",
-                        // });
-                        // await images.refetch();
                       }}
                       multiple
                     />
