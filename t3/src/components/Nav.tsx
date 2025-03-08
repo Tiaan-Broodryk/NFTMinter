@@ -62,32 +62,10 @@ export default function Nav() {
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {session.status === "authenticated" &&
-                  (session.data.user.email === "nadiaswanepoel36@gmail.com" ||
                     session.data.user.email ===
-                      "nadiaswanepoel36@gmail.com") ? (
-                    <>
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          aria-current={item.current ? "page" : undefined}
-                          className={classNames(
-                            item.current
-                              ? "bg-neutral-900 text-white"
-                              : "text-neutral-300 hover:bg-neutral-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium",
-                          )}
-                        >
-                          {item.name}
-                        </a>
-                      ))}
-                    </>
-                  ) : session.status === "authenticated" ? (
-                    <div>
-                      {/* This is where you can render a different component for other authenticated users */}
-                      {navigation
-                        .filter((item) => item.name !== "Admin")
-                        .map((item) => (
+                      "nadiaswanepoel36@gmail.com" && (
+                      <>
+                        {navigation.map((item) => (
                           <a
                             key={item.name}
                             href={item.href}
@@ -102,8 +80,31 @@ export default function Nav() {
                             {item.name}
                           </a>
                         ))}
-                    </div>
-                  ) : null}
+                      </>
+                    )}
+                  {session.status === "authenticated" &&
+                    session.data.user.email !==
+                      "nadiaswanepoel36@gmail.com" && (
+                      <>
+                        {navigation
+                          .filter((item) => item.name !== "Admin")
+                          .map((item) => (
+                            <a
+                              key={item.name}
+                              href={item.href}
+                              aria-current={item.current ? "page" : undefined}
+                              className={classNames(
+                                item.current
+                                  ? "bg-neutral-900 text-white"
+                                  : "text-neutral-300 hover:bg-neutral-700 hover:text-white",
+                                "rounded-md px-3 py-2 text-sm font-medium",
+                              )}
+                            >
+                              {item.name}
+                            </a>
+                          ))}
+                      </>
+                    )}
 
                   {session.status === "unauthenticated" && (
                     <>
