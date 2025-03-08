@@ -158,7 +158,7 @@ export default function Hero() {
                     All our apartments have 2 bedrooms and 1 bathroom and
                     sleeper couch in the lounge. The kitchen is fully equipped
                     with a fridge, microwave, stove, and oven. The lounge has a
-                    TV with DSTV & Netflix.
+                    Smart TV with Netflix.
                   </p>
                 </div>
                 <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
