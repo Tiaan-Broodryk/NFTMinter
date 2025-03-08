@@ -48,21 +48,6 @@ export default function Home(
     <>
       <Head>
         <title>Nadia&apos;s Accommodation</title>
-        <meta name="og.description" content="Choose it Drive it" />
-        <meta property="og:title" content="Auto Dex" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          property="og:image"
-          content="https://www.autodex.co.za/_next/image?url=https%3A%2F%2Fapirs.netron.co.za%2Fuploads%2Fed687870450c444a98b5641cb99c19b8.png&w=640&q=75"
-        />
-        <meta
-          property="og:image:secure_url"
-          content="https://www.autodex.co.za/_next/image?url=https%3A%2F%2Fapirs.netron.co.za%2Fuploads%2Fed687870450c444a98b5641cb99c19b8.png&w=640&q=75"
-        />
-        <meta property="og:image:type" content="image/jpeg" />
-        <meta property="og:image:width" content="400" />
-        <meta property="og:image:height" content="300" />
-        <meta property="og:image:alt" content="Image" />
       </Head>
       <noscript>
         <iframe
