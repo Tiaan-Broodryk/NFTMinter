@@ -84,7 +84,7 @@ export default function Admin() {
                       />
                     </Label>
                   </div>
-                  <pre>{JSON.stringify(form.Images, null, 2)}</pre>
+
                   <div className="mb-2 mt-2 rounded-md bg-neutral-200 p-4">
                     <div className=" font-semibold text-gray-900">
                       Listing Images

@@ -99,7 +99,6 @@ export default function ListingTile(props: {
                         <RiCloseLargeLine />
                       </button>
                     </div>
-                    <pre>{JSON.stringify(form, null, 2)}</pre>
 
                     <div className="mt-2 rounded-md p-2">
                       <Label title="Name">
