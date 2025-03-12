@@ -59,12 +59,12 @@ const faqs = [
       "Die eiendom is geleë in 'n veilige buurt, maar dit is altyd 'n goeie idee om die eiendom veilig te hou.Die voertuigtoegangshek maak nie vanself toe nie.",
     icon: MdOutlineSecurity,
   },
-  {
-    question: "Slaapbankstelle",
-    answer:
-      "Die bankstelle is in die sitkamer en kan as 'n bed vir 2 persone gebruik word.Maar GEBRUIK asseblief die beskermende oortreksels vir die slaapbankstelle wanneer julle dit as 'n bed gebruik.Die beskermende oortreksels is in die kas in die beige kamer.",
-    icon: LiaCouchSolid,
-  },
+  // {
+  //   question: "Slaapbankstelle",
+  //   answer:
+  //     "Die bankstelle is in die sitkamer en kan as 'n bed vir 2 persone gebruik word.Maar GEBRUIK asseblief die beskermende oortreksels vir die slaapbankstelle wanneer julle dit as 'n bed gebruik.Die beskermende oortreksels is in die kas in die beige kamer.",
+  //   icon: LiaCouchSolid,
+  // },
   {
     question: "Wi-Fi",
     answer: "Gratis Wi-Fi is beskikbaar in die eiendom. ",

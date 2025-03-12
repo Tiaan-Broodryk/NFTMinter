@@ -303,11 +303,11 @@ export default function ListingTile(props: {
                         <div className="flex gap-2 rounded-full border-2 p-1 md:border-none">
                           <div className="pt-1">
                             <Switch
-                              checked={form.braai}
+                              checked={form.swimingPool}
                               onChange={() =>
                                 setForm({
                                   ...form,
-                                  braai: !form.braai,
+                                  swimingPool: !form.swimingPool,
                                 })
                               }
                               className="group relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-100 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 data-[checked]:bg-blue-600"
@@ -354,11 +354,11 @@ export default function ListingTile(props: {
                         <div className="flex gap-2 rounded-full border-2 p-1 md:border-none">
                           <div className="pt-1">
                             <Switch
-                              checked={form.swimingPool}
+                              checked={form.braai}
                               onChange={() =>
                                 setForm({
                                   ...form,
-                                  swimingPool: !form.swimingPool,
+                                  braai: !form.braai,
                                 })
                               }
                               className="group relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-100 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 data-[checked]:bg-blue-600"

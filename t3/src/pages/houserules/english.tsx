@@ -58,12 +58,12 @@ const faqs = [
       "Please keep the side gates locked at all times. The property is located in a safe neighborhood, but it is always a good idea to keep the property secure. The vehicle entry gate does not close by it self.",
     icon: MdOutlineSecurity,
   },
-  {
-    question: "Sleeper Sofa's",
-    answer:
-      "The sofa's are located in the living room and can be used as a bed for 2 persons. But Please USE the protective covers for the sofa's when using them as a bed. The protective covers are located in the closet in the beige room.",
-    icon: LiaCouchSolid,
-  },
+  // {
+  //   question: "Sleeper Sofa's",
+  //   answer:
+  //     "The sofa's are located in the living room and can be used as a bed for 2 persons. But Please USE the protective covers for the sofa's when using them as a bed. The protective covers are located in the closet in the beige room.",
+  //   icon: LiaCouchSolid,
+  // },
   {
     question: "Wi-Fi",
     answer: "The property has free Wi-Fi.",
