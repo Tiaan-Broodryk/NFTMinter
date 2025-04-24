@@ -198,7 +198,7 @@ const MyNfts: NextPage = () => {
                           e.currentTarget.style.display = "none";
                         }}
                       />
-                      test
+
                       <div className="p-2">
                         <h3 className="mb-2 text-xl font-semibold text-white">
                           {nft.content?.metadata?.name}
