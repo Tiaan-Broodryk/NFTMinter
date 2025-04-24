@@ -9,7 +9,7 @@ import { createTRPCNext } from "@trpc/next";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import superjson, { registerCustom } from "superjson";
 import { RecordId } from "surrealdb";
-
+import { PinataSDK } from "pinata"
 import { type AppRouter } from "~/server/api/root";
 
 const getBaseUrl = () => {
@@ -31,6 +31,11 @@ registerCustom<RecordId, string>(
   },
   "surrealdb.RecordId",
 );
+
+export const pinata = new PinataSDK({
+  pinataJwt: `${process.env.PINATA_JWT}`,
+  pinataGateway: `${process.env.NEXT_PUBLIC_GATEWAY_URL}`
+})
 
 /** A set of type-safe react-query hooks for your tRPC API. */
 export const api = createTRPCNext<AppRouter>({

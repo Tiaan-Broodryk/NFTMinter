@@ -1,120 +1,194 @@
-import { useSession } from "next-auth/react";
-
-import { api, type RouterOutputs } from "~/utils/api";
-import { useVisitCount } from "~/lib/visitors/useVisitCount";
-import Image from "next/image";
-import { getServerAuthSession } from "~/server/auth";
-import { db_getserversideprops } from "~/server/db_getserversideprops";
-import { useRouter } from "next/router";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { type NextPage } from "next";
 import Head from "next/head";
-import Nav from "~/components/Nav";
-import Hero from "~/components/Hero";
-import Listings from "~/components/Lisings";
-import ListingTile from "~/components/ListingTile";
-import ListingTile2 from "~/components/ListingTile2";
-import Footer from "~/components/Footer";
+import { useEffect, useState } from "react";
+import { LuExternalLink } from "react-icons/lu";
+import { api } from "~/utils/api";
 
-type Listings = RouterOutputs["Listing"]["GetListings"];
-export async function getServerSideProps(context: {
-  req: GetServerSidePropsContext["req"];
-  res: GetServerSidePropsContext["res"];
-  query: {
-    id: string;
+interface NFTResponse {
+  id: string;
+  content: {
+    $schema: string;
+    json_uri: string;
+    files: Array<{
+      uri: string;
+      cdn_uri: string;
+      mime: string;
+    }>;
+    metadata: {
+      attributes: Array<{
+        value: string;
+        trait_type: string;
+      }>;
+      description: string;
+      name: string;
+      symbol: string;
+      token_standard: string;
+    };
+    links: {
+      image: string;
+      external_url: string;
+    };
   };
-}) {
-  const session = await getServerAuthSession(context);
-  const dbconnected = await db_getserversideprops();
-  const listings = await dbconnected.client.query(
-    /* surrealql */ `SELECT * ,(SELECT * FROM listing_image WHERE listing_id = $parent.id)  as listing_images FROM Listing;`,
-  );
-
-  return {
-    props: {
-      data: {
-        listings: listings[0] as Listings,
-      },
-    },
+  authorities: Array<{
+    address: string;
+    scopes: string[];
+  }>;
+  compression: {
+    eligible: boolean;
+    compressed: boolean;
+    data_hash: string;
+    creator_hash: string;
+    asset_hash: string;
+    tree: string;
+    seq: number;
+    leaf_id: number;
+  };
+  grouping: Array<{
+    group_key: string;
+    group_value: string;
+  }>;
+  royalty: {
+    royalty_model: string;
+    target: null;
+    percent: number;
+    basis_points: number;
+    primary_sale_happened: boolean;
+    locked: boolean;
+  };
+  creators: Array<{
+    address: string;
+    share: number;
+    verified: boolean;
+  }>;
+  ownership: {
+    frozen: boolean;
+    delegated: boolean;
+    delegate: string;
+    ownership_model: string;
+    owner: string;
+  };
+  supply: {
+    print_max_supply: number;
+    print_current_supply: number;
+    edition_nonce: number;
+  };
+  mutable: boolean;
+  burnt: boolean;
+  token_info: {
+    supply: number;
+    decimals: number;
+    token_program: string;
+    associated_token_address: string;
   };
 }
 
-export default function Home(
-  props: InferGetServerSidePropsType<typeof getServerSideProps>,
-) {
-  const session = useSession();
-  const router = useRouter();
-  const listings = props.data.listings;
+const Home: NextPage = () => {
+  const [nfts, setNfts] = useState<NFTResponse[]>([]);
+  const { connection } = useConnection();
+  const { publicKey } = useWallet();
+  const nftListings = api.Listing.getAllListings.useQuery();
+
   return (
     <>
       <Head>
-        <title>Nadia&apos;s Accommodation</title>
+        <title>NFT Sea - Mint Your NFTs</title>
+        <meta
+          name="description"
+          content="Mint your NFTs on Solana blockchain"
+        />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <noscript>
-        <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-KFWF2WS5"
-          height="0"
-          width="0"
-          className="display:none;visibility:hidden hidden"
-        ></iframe>
-      </noscript>
-      <div className="w-screen overflow-hidden">
-        <Nav />
-        <Hero />
-        {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
-        <div className="bg-neutral-600 p-5">
-          {" "}
-          <div className="mx-auto mt-2 grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-3">
-            {listings.map((listing) => (
-              <>
-                <ListingTile2
-                  Description={listing.Description}
-                  Title={listing.Title}
-                  braai={listing.braai}
-                  swimingPool={listing.swimmingPool}
-                  wifi={listing.wifi}
-                  price={listing.price}
-                  bedrooms={listing.bedrooms}
-                  bathrooms={listing.bathrooms}
-                  parking={listing.parking}
-                  people={listing.people}
-                  id={listing.id.toString()}
-                  Images={
-                    listing.listing_images.map((image) => ({
-                      image_url: image.image_url,
-                      Order: image.Order,
-                      id: image.id.toString(),
-                      listing_id: image.listing_id.toString(),
-                    })) ?? []
-                  }
-                />
-              </>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative  h-[300px] bg-black md:h-[580px]">
-          <div className="z-10">
-            {" "}
-            <Image
-              src={"/Images/Hero.jpg"}
-              alt={""}
-              height={4000}
-              width={4000}
-              className="absolute   block h-full w-full  object-cover opacity-50 "
-            />
-          </div>
-
-          <div className="absolute grid w-full grid-cols-1 px-5 pt-24  md:px-0 md:pt-60">
-            <div className="text-center text-2xl font-bold text-white  md:text-7xl">
-              You have a place here
+      <main className="">
+        <div className="container mx-auto px-4 py-8">
+          <div className="mx-auto mb-5  mt-2 max-w-6xl items-center justify-center rounded-xl border border-neutral-300 bg-white/15 p-8">
+            <div className="flex items-center justify-center">
+              <div className="flex  gap-2 font-serif">
+                <div
+                  className="text-4xl font-bold uppercase tracking-wider"
+                  style={{
+                    background: "linear-gradient(to right, #ffffff, #9e9aa0)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Recently
+                </div>
+                <div
+                  className="text-4xl font-bold uppercase tracking-wider"
+                  style={{
+                    background: "linear-gradient(to left, #ffffff, #9e9aa0)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Listed
+                </div>
+                <div
+                  className="text-4xl font-bold uppercase tracking-wider"
+                  style={{
+                    background: "linear-gradient(to left, #ffffff, #9e9aa0)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  NFT&apos;s
+                </div>
+              </div>
             </div>
-            <div className="text-center font-bold text-white  md:text-xl">
-              Book now and have your best vacation.
+            <div className="mx-auto mt-2 max-w-xl px-5 text-center text-sm text-neutral-400">
+              These are NFT&apos;s created on NFT Sea
             </div>
           </div>
+          <div className="mx-auto max-w-6xl">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {nftListings?.data?.map((nft) => {
+                const imageUrl = nft.image_url;
+                if (!imageUrl) return null;
+
+                return (
+                  <div
+                    key={nft.id.toString()}
+                    className="rounded-lg bg-white/10 shadow-lg"
+                  >
+                    <img
+                      src={imageUrl}
+                      alt="Image not loading"
+                      className="mb-4 h-60 w-full rounded-lg object-cover"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
+                    />
+                    <div className="p-2">
+                      {" "}
+                      <h3 className="mb-2 text-xl font-semibold text-white">
+                        {nft.title}
+                      </h3>
+                      <p className="text-gray-400">{nft.description}</p>
+                      <a
+                        href={`https://xray.helius.xyz/token/${nft.mint_address}?network=mainnet`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 flex rounded-sm  "
+                      >
+                        <span className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text  text-transparent hover:from-blue-600 hover:to-pink-600">
+                          View on Explorer
+                        </span>
+                        <LuExternalLink
+                          className="ml-2  text-pink-600"
+                          size={20}
+                        />
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
-        <Footer />
-      </div>
+      </main>
     </>
   );
-}
+};
+
+export default Home;

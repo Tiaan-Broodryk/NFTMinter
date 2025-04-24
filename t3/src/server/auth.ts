@@ -52,31 +52,31 @@ export const authOptions: NextAuthOptions = {
       // console.log("===== SESSION ====== ")
       // console.log(inp);
 
-      const apikey_req = await dbs.query(
-        `SELECT * from only apikey WHERE user = ${user.id} LIMIT 1;`,
-        "GetApiKeyForUser",
-      );
+      // const apikey_req = await dbs.query(
+      //   `SELECT * from only apikey WHERE user = ${user.id} LIMIT 1;`,
+      //   "GetApiKeyForUser",
+      // );
 
-      console.log("------------");
-      console.log(apikey_req);
+      // console.log("------------");
+      // console.log(apikey_req);
 
-      let apikey = apikey_req[0]?.apikey as string | undefined;
+      // let apikey = apikey_req[0]?.apikey as string | undefined;
 
-      if (!apikey) {
-        /////// create first default apikey
-        apikey = crypto.randomUUID().replaceAll("-", "");
-        await dbs.client.create("apikey", {
-          apikey: apikey,
-          user: new RecordId("user", user.id.split(":")[1]!),
-        });
-      }
+      // if (!apikey) {
+      //   /////// create first default apikey
+      //   apikey = crypto.randomUUID().replaceAll("-", "");
+      //   await dbs.client.create("apikey", {
+      //     apikey: apikey,
+      //     user: new RecordId("user", user.id.split(":")[1]!),
+      //   });
+      // }
 
       return {
         ...session,
         user: {
           ...session.user,
           id: user.id,
-          apikey,
+          // apikey,
         },
       };
     },

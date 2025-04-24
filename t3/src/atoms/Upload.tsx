@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { FaArrowCircleUp } from "react-icons/fa";
+import { BsUpload } from "react-icons/bs";
 import { cn } from "~/utils/cn";
 
 export interface PutBlobResult {
@@ -96,9 +96,9 @@ export function Upload(props: {
     <div>
       <button
         className={cn(
-          "flex w-full flex-1 flex-col items-center justify-center gap-2 rounded border-2 border-dashed border-green-500 bg-green-500/30 p-5 text-center align-middle text-xs text-white transition hover:bg-green-500/60",
-          dragover && "bg-green-500 hover:bg-green-500",
-          busy && "animate-pulse bg-green-500 hover:bg-green-500",
+          "flex w-full flex-1 flex-col items-center justify-center gap-2 rounded-sm border border-dashed border-neutral-400 bg-neutral-600 p-5 text-center align-middle text-xs text-white transition hover:bg-neutral-700 hover:text-neutral-400 [&>*]:border-spacing-8",
+          dragover && "bg-neutral-700 hover:bg-neutral-700",
+          busy && "animate-pulse bg-neutral-700 hover:bg-neutral-700",
         )}
         onClick={() => {
           if (hiddenFileInput.current) hiddenFileInput.current.click();
@@ -129,8 +129,11 @@ export function Upload(props: {
           handleFiles(files).catch(console.error);
         }}
       >
-        <FaArrowCircleUp size={26} />
-
+        <div className="flex gap-2 font-serif text-base">
+          {" "}
+          <BsUpload size={20} />
+          Upload Image
+        </div>
         <input
           type="file"
           onChange={(e) => {
@@ -143,10 +146,8 @@ export function Upload(props: {
           multiple={props.multiple}
           style={{ display: "none" }} // Make the file input element invisible
         />
-        <span className="whitespace-pre-wrap text-neutral-800">
-          {busy
-            ? "Uploading... Please wait."
-            : "Click or Drag and drop image's to upload"}
+        <span className="whitespace-pre-wrap text-neutral-400">
+          {busy ? "Uploading... Please wait." : "format supported"}
         </span>
       </button>
     </div>

@@ -3,15 +3,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
           
           import type { Uuid, RecordId } from "surrealdb";
-export type TeamSignUpCreateTeamMember = [
- TeamSignUpCreateTeamMemberquery1[]
+export type CreateNftListing = [
+ CreateNftListingquery1[]
 ]
-type TeamSignUpCreateTeamMemberquery1 = {
+type CreateNftListingquery1 = {
   created_at: Date;
-  email: string;
+  creator: string;
+  description: string;
   id: RecordId;
-  pending: boolean;
-  role: string;
-  team: RecordId;
-  user: RecordId;
+  image_url: string;
+  listed: boolean;
+  mint_address: string;
+  price: number;
+  title: string;
 }

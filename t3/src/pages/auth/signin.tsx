@@ -19,15 +19,7 @@ export default function SignIn({
       <div className="relative flex h-screen  w-screen bg-neutral-800 text-neutral-200 ">
         <div className="absolute grid  h-full w-full  items-center justify-center p-2 text-white">
           <div className="z-50 mx-auto grid grid-cols-1 rounded-md bg-neutral-600  p-4 shadow-2xl shadow-neutral-500 md:max-w-xl">
-            <div>
-              <Image
-                src={"/Images/Logo3.png"}
-                alt={""}
-                width={2000 * 4}
-                height={2000 * 4}
-                className=" mx-auto mb-5 w-2/3"
-              />
-            </div>
+            <div></div>
             <form
               method="post"
               action="/api/auth/signin/email"

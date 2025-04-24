@@ -3,15 +3,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
           
           import type { Uuid, RecordId } from "surrealdb";
-export type TeamSignUpCreateTeam = [
- TeamSignUpCreateTeamquery1[]
+export type GetAllListings = [
+ GetAllListingsquery1[]
 ]
-type TeamSignUpCreateTeamquery1 = {
+type GetAllListingsquery1 = {
+  created_at: Date;
+  creator: string;
   description: string;
-  freeTrial: boolean;
   id: RecordId;
-  name: string;
-  owner: RecordId;
-  pro: boolean;
-  slug: string;
+  image_url: string;
+  listed: boolean;
+  mint_address: string;
+  price: number;
+  title: string;
 }
