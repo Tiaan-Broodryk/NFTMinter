@@ -174,7 +174,7 @@ const MyNfts: NextPage = () => {
           </div>
         </div>
 
-        <div className="container mx-auto max-w-6xl pt-5">
+        <div className="container mx-auto max-w-6xl pb-20 pt-5">
           <div className="space-y-8">
             {/* <pre>{JSON.stringify(nfts, null, 2)}</pre> */}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
