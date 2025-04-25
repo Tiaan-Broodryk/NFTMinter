@@ -161,7 +161,6 @@ const Home: NextPage = () => {
                 );
               })}
             </div>
-            test
           </div>
         </div>
       </main>
