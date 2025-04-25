@@ -3,6 +3,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { LuExternalLink } from "react-icons/lu";
+import NFTTile from "~/components/NFTTile";
 import { api } from "~/utils/api";
 
 interface NFTResponse {
@@ -105,7 +106,7 @@ const Home: NextPage = () => {
             <div className="flex items-center justify-center">
               <div className="flex  gap-2 font-serif">
                 <div
-                  className="text-4xl font-bold uppercase tracking-wider"
+                  className="text-2xl font-bold uppercase tracking-wider md:text-4xl"
                   style={{
                     background: "linear-gradient(to right, #ffffff, #9e9aa0)",
                     WebkitBackgroundClip: "text",
@@ -115,7 +116,7 @@ const Home: NextPage = () => {
                   Recently
                 </div>
                 <div
-                  className="text-4xl font-bold uppercase tracking-wider"
+                  className="text-2xl font-bold uppercase tracking-wider md:text-4xl"
                   style={{
                     background: "linear-gradient(to left, #ffffff, #9e9aa0)",
                     WebkitBackgroundClip: "text",
@@ -125,7 +126,7 @@ const Home: NextPage = () => {
                   Listed
                 </div>
                 <div
-                  className="text-4xl font-bold uppercase tracking-wider"
+                  className="text-2xl font-bold uppercase tracking-wider md:text-4xl"
                   style={{
                     background: "linear-gradient(to left, #ffffff, #9e9aa0)",
                     WebkitBackgroundClip: "text",
@@ -147,40 +148,16 @@ const Home: NextPage = () => {
                 if (!imageUrl) return null;
 
                 return (
-                  <div
+                  <NFTTile
                     key={nft.id.toString()}
-                    className="rounded-lg bg-white/10 shadow-lg"
-                  >
-                    <img
-                      src={imageUrl}
-                      alt="Image not loading"
-                      className="mb-4 h-60 w-full rounded-lg object-cover"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
-                    <div className="p-2">
-                      {" "}
-                      <h3 className="mb-2 text-xl font-semibold text-white">
-                        {nft.title}
-                      </h3>
-                      <p className="text-gray-400">{nft.description}</p>
-                      <a
-                        href={`https://xray.helius.xyz/token/${nft.mint_address}?network=mainnet`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-4 flex rounded-sm  "
-                      >
-                        <span className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text  text-transparent hover:from-blue-600 hover:to-pink-600">
-                          View on Explorer
-                        </span>
-                        <LuExternalLink
-                          className="ml-2  text-pink-600"
-                          size={20}
-                        />
-                      </a>
-                    </div>
-                  </div>
+                    nft={{
+                      id: nft.id.toString(),
+                      title: nft.title,
+                      description: nft.description,
+                      mint_address: nft.mint_address,
+                    }}
+                    imageUrl={imageUrl}
+                  />
                 );
               })}
             </div>

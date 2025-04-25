@@ -3,6 +3,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { LuExternalLink, LuX } from "react-icons/lu";
+import NFTTile from "~/components/NFTTile";
 
 interface NFTResponse {
   id: string;
@@ -132,8 +133,6 @@ const MyNfts: NextPage = () => {
     void fetchRecentNFTs();
   }, [publicKey]);
 
-  const [selectedNft, setSelectedNft] = useState<NFTResponse | null>(null);
-
   return (
     <>
       <Head>
@@ -174,8 +173,8 @@ const MyNfts: NextPage = () => {
             These are the Your NFT&apos;s
           </div>
         </div>
-        <pre>{JSON.stringify(selectedNft, null, 2)}</pre>
-        <div className="container mx-auto px-4 py-8">
+
+        <div className="container mx-auto max-w-6xl pt-5">
           <div className="space-y-8">
             {/* <pre>{JSON.stringify(nfts, null, 2)}</pre> */}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -185,98 +184,16 @@ const MyNfts: NextPage = () => {
 
                 return (
                   <>
-                    <div
-                      key={nft.id}
-                      className="cursor-pointer rounded-lg bg-white/10 shadow-lg"
-                      onClick={() => setSelectedNft(nft)}
-                    >
-                      <img
-                        src={imageUrl}
-                        alt="Image not loading"
-                        className="mb-4 h-60 w-full rounded-lg object-cover"
-                        onError={(e) => {
-                          e.currentTarget.style.display = "none";
-                        }}
-                      />
-
-                      <div className="p-2">
-                        <h3 className="mb-2 text-xl font-semibold text-white">
-                          {nft.content?.metadata?.name}
-                        </h3>
-                        <p className="text-gray-400">
-                          {nft.content?.metadata?.description}
-                        </p>
-                        <a
-                          href={`https://xray.helius.xyz/token/${nft.id}?network=mainnet`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-4 flex rounded-sm"
-                        >
-                          <span className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent hover:from-blue-600 hover:to-pink-600">
-                            View on Explorer
-                          </span>
-                          <LuExternalLink
-                            className="ml-2 text-pink-600"
-                            size={20}
-                          />
-                        </a>
-                      </div>
-                    </div>
-
-                    {selectedNft && (
-                      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-                        <div className="mx-auto max-w-2xl rounded-lg border-l border-white/30 bg-black p-6">
-                          <div className="flex justify-end">
-                            <button
-                              onClick={() => setSelectedNft(null)}
-                              className="text-white hover:text-gray-300"
-                            >
-                              <LuX size={24} />
-                            </button>
-                          </div>
-                          <div className="mt-4">
-                            <img
-                              src={selectedNft.content?.files[0]?.uri}
-                              alt="NFT"
-                              className="mx-auto h-64 w-64 rounded-lg object-cover"
-                            />
-                            <div className="mt-4 space-y-4">
-                              <h2 className="text-2xl font-bold text-white">
-                                {selectedNft.content?.metadata?.name}
-                              </h2>
-                              <p className="text-gray-300">
-                                {selectedNft.content?.metadata?.description}
-                              </p>
-                              <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                  <p className="text-sm text-gray-400">
-                                    Mint Address
-                                  </p>
-                                  <p className="text-white">{selectedNft.id}</p>
-                                </div>
-                                <div>
-                                  <p className="text-sm text-gray-400">Owner</p>
-                                  <p className="text-white">
-                                    {selectedNft.ownership?.owner}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="mt-4">
-                                <a
-                                  href={`https://xray.helius.xyz/token/${selectedNft.id}?network=mainnet`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center rounded-sm bg-gradient-to-r from-blue-500 to-pink-500 px-4 py-2 text-white hover:from-blue-600 hover:to-pink-600"
-                                >
-                                  View on Explorer
-                                  <LuExternalLink className="ml-2" size={20} />
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                    <NFTTile
+                      key={nft.id.toString()}
+                      nft={{
+                        id: nft.id.toString(),
+                        title: nft.content?.metadata?.name,
+                        description: nft.content?.metadata?.description,
+                        mint_address: nft.id,
+                      }}
+                      imageUrl={imageUrl}
+                    />
                   </>
                 );
               })}

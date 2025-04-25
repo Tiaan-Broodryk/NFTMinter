@@ -1,14 +1,13 @@
 import { PinataSDK } from "pinata";
-
-const pinata = new PinataSDK({
-  pinataJwt:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJmNzNlZmE4YS04MTQyLTQ1ZWYtYmI4OC1mOTdiZDZhMDUyZmMiLCJlbWFpbCI6InRpYWFuY29kZTFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiRlJBMSJ9LHsiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiTllDMSJ9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjA5NGRlZGEzNTEyY2E5MWQxZjUxIiwic2NvcGVkS2V5U2VjcmV0IjoiYzhlYTNhMDdlODlmY2FmOGFlNWU1ODY2Nzc4NGUzY2U4ZDUwYzk5NTQ0YjRkNzMxZjQzZTY3MDA0OTMyZGMyOCIsImV4cCI6MTc3NzA2MTc1MX0.n_ahSlckYI-BEOrgBbps7mpaX2asCjIeszwOygfEVD0",
-  pinataGateway: "https://lavender-electric-grasshopper-388.mypinata.cloud",
-});
-
 import { useRef, useState } from "react";
 import { BsUpload } from "react-icons/bs";
+import { env } from "~/env";
 import { cn } from "~/utils/cn";
+
+const pinata = new PinataSDK({
+  pinataJwt: process.env.NEXT_PUBLIC_PINATA_JWT ?? "",
+  pinataGateway: "https://lavender-electric-grasshopper-388.mypinata.cloud",
+});
 
 export interface PutBlobResult {
   url: string;
@@ -107,6 +106,7 @@ export function PinataUpload2(props: {
           {busy ? "Uploading... Please wait." : "format supported"}
         </span>
       </button>
+
       {/* {uploadStatus && (
         <p className="mt-2 text-center text-sm text-neutral-400">
           {uploadStatus}

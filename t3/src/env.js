@@ -26,6 +26,8 @@ export const env = createEnv({
 
     RESEND_API_KEY: z.string(),
     RESEND_FROM: z.string(),
+    // PINATA_JWT: z.string(),
+
 
     SURREALDB_HOST: z.string(),
     SURREALDB_USER: z.string(),
@@ -61,6 +63,7 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
+    // PINATA_JWT: process.env.PINATA_JWT,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     RESEND_FROM: process.env.RESEND_FROM,

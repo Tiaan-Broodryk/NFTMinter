@@ -60,7 +60,8 @@ export default function Nav() {
   return (
     <>
       <Disclosure as="nav" className="">
-        <div className="mx-auto max-w-6xl  ">
+        <div className="mx-auto max-w-6xl">
+          {/* Desktop Navigation */}
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* Mobile menu button*/}
@@ -80,7 +81,7 @@ export default function Nav() {
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex shrink-0 items-center">
                 <Link href={"./"}>
-                  <span className="font-serif text-3xl font-bold ">
+                  <span className="font-serif text-3xl font-bold">
                     <span className="pr-1 text-white">NFT</span>
                     <span className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent">
                       <span>S</span>
@@ -108,9 +109,12 @@ export default function Nav() {
             </div>
 
             <div className="flex flex-row gap-2 text-sm">
-              <button className="hidden rounded-md p-2 font-bold text-white hover:bg-gradient-to-r hover:from-blue-500/70 hover:to-pink-500/70 md:block">
+              <Link
+                href={"./"}
+                className="hidden rounded-md p-2 font-bold text-white hover:bg-gradient-to-r hover:from-blue-500/70 hover:to-pink-500/70 md:block"
+              >
                 Explore Marketplace
-              </button>
+              </Link>
               <button
                 onClick={() => setIsWalletPanelOpen(true)}
                 className="hidden rounded-md p-2 font-bold text-white hover:bg-gradient-to-r hover:from-blue-500/70 hover:to-pink-500/70 md:block"
@@ -131,22 +135,36 @@ export default function Nav() {
 
         <DisclosurePanel className="sm:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
-            {navigation.map((item) => (
-              <DisclosureButton
-                key={item.name}
-                as="a"
-                href={item.href}
-                aria-current={item.current ? "page" : undefined}
-                className={classNames(
-                  item.current
-                    ? "bg-neutral-900 text-white"
-                    : "text-neutral-300 hover:bg-neutral-700 hover:text-white",
-                  "block rounded-md px-3 py-2 text-base font-medium",
-                )}
-              >
-                {item.name}
-              </DisclosureButton>
-            ))}
+            {/* Mobile Navigation */}
+            <div className="sm:hidden">
+              <div className="space-y-1 px-2 pb-3 pt-2">
+                <Link
+                  href={"./create"}
+                  className="block rounded-md px-3 py-2 text-base font-medium text-neutral-300 hover:bg-neutral-700 hover:text-white"
+                >
+                  Create
+                </Link>
+                <Link
+                  href={"./myNft"}
+                  className="block rounded-md px-3 py-2 text-base font-medium text-neutral-300 hover:bg-neutral-700 hover:text-white"
+                >
+                  My NFT&apos;s
+                </Link>
+                <Link
+                  href={"./"}
+                  className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-neutral-300 hover:bg-neutral-700 hover:text-white"
+                >
+                  Explore Marketplace
+                </Link>
+                <button
+                  onClick={() => setIsWalletPanelOpen(true)}
+                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-neutral-300 hover:bg-neutral-700 hover:text-white"
+                >
+                  <BiWalletAlt size={20} />
+                  <span>Connect Wallet</span>
+                </button>
+              </div>
+            </div>
           </div>
         </DisclosurePanel>
       </Disclosure>

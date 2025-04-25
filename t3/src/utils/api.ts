@@ -32,10 +32,12 @@ registerCustom<RecordId, string>(
   "surrealdb.RecordId",
 );
 
-export const pinata = new PinataSDK({
-  pinataJwt: `${process.env.PINATA_JWT}`,
-  pinataGateway: `${process.env.NEXT_PUBLIC_GATEWAY_URL}`
-})
+// export const pinata = new PinataSDK({
+//   pinataJwt: `${process.env.PINATA_JWT}`,
+//   pinataGateway: "https://lavender-electric-grasshopper-388.mypinata.cloud",
+// })
+
+
 
 /** A set of type-safe react-query hooks for your tRPC API. */
 export const api = createTRPCNext<AppRouter>({

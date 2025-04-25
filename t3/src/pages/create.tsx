@@ -13,8 +13,9 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { api } from "~/utils/api";
 import Saved from "~/components/notifications/saved";
-import PinataUpload from "~/atoms/PinataUpload";
+
 import PinataUpload2 from "~/atoms/PinataUpload2";
+import Head from "next/head";
 // imports icons
 
 const Finished = () => {
@@ -213,6 +214,14 @@ const Finished = () => {
 
   return (
     <div>
+      <Head>
+        <title>NFT Sea - Mint Your NFTs</title>
+        <meta
+          name="description"
+          content="Mint your NFTs on Solana blockchain"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       {createListing.isSuccess ||
         (outputs[0]?.dependency && (
           <>
