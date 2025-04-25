@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
-        "Accomodation"
-    ]
+        "makesdata"
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
