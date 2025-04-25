@@ -13,6 +13,8 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { api } from "~/utils/api";
 import Saved from "~/components/notifications/saved";
+import PinataUpload from "~/atoms/PinataUpload";
+import PinataUpload2 from "~/atoms/PinataUpload2";
 // imports icons
 
 const Finished = () => {
@@ -385,7 +387,7 @@ const Finished = () => {
                       />
                     </>
                   )}
-                  <Upload
+                  {/* <Upload
                     onUpload={async (data) => {
                       console.log("uploaded");
                       console.log(data);
@@ -402,12 +404,24 @@ const Finished = () => {
                         });
                       });
                     }}
+                  /> */}
+                  <PinataUpload2
+                    onUpload={async (data) => {
+                      console.log("uploaded");
+                      console.log(data);
+                      const first = data[0];
+
+                      if (!first) return;
+
+                      console.log(first);
+                      setForm({
+                        ...form,
+                        image: first.url,
+                      });
+                    }}
                   />
 
                   <div>
-                    {/* <label className="block text-sm font-medium text-gray-300">
-                  NFT Title
-                </label> */}
                     <input
                       type="text"
                       placeholder="NFT Title"
