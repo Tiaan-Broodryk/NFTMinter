@@ -1,4 +1,4 @@
-// imports methods relevant to the react framework
+#// imports methods relevant to the react framework
 import * as React from "react";
 // throws notifications for user friendly error handling
 import { toast } from "react-toastify";
@@ -443,7 +443,7 @@ const Finished = () => {
                     />
                   </div>
 
-                  <div className="pb-20">
+                      <div className="pb-5">
                     {/* <label className="block text-sm font-medium text-gray-300">
                   Description
                 </label> */}
@@ -468,7 +468,7 @@ const Finished = () => {
                         </p>
                       </>
                     )}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 pb-20 gap-4">
                     {" "}
                     {(form.image === "" ||
                       form.nftName === "" ||
