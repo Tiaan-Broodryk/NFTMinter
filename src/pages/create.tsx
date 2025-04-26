@@ -1,4 +1,4 @@
-#// imports methods relevant to the react framework
+//imports methods relevant to the react framework
 import * as React from "react";
 // throws notifications for user friendly error handling
 import { toast } from "react-toastify";
